@@ -17,6 +17,8 @@ def dateToString(inputDate):
 
 foutput = open("output.txt", "a+")
 
+
+x =0;
 # PROGRAM START
 start_time = time.time()
 now = datetime.datetime.now()
@@ -29,6 +31,8 @@ for fromAP in Params.fromAirports:
                 loopTillWeCan = True
                 while loopTillWeCan:
                     try:
+                        print(toAP)
+                        x = x + 1
                         tempLowPriceFlights = checkFlights(dateToString(currentDate), fromAP,
                                                            dateToString(currentDate + datetime.timedelta(
                                                                days=Params.minVacationDays + i)), toAP)
@@ -38,6 +42,9 @@ for fromAP in Params.fromAirports:
                     except Exceptions.TooManyAcessTrys:
                         time.sleep(5)
                     except Exceptions.OtherError as e:
+                        print("ERROR %d DETECTED %s, %s - %d days, to: %s---- %s\n" % (e.value,
+                        dateToString(currentDate), fromAP, Params.minVacationDays + i, toAP, e.response)
+                              )
                         foutput.write("ERROR %d DETECTED %s, %s - %d days, to: %s---- %s\n" % (e.value,
                         dateToString(currentDate), fromAP, Params.minVacationDays + i, toAP, e.response))
                         loopTillWeCan = False

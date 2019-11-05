@@ -1,0 +1,31 @@
+NewFile
+NewFile
+NewFile
+NewFile
+NewFile
+ERROR 400 DETECTED 2020-02-13, IAH-sky - 8 days, to: EG-sky---- {"ValidationErrors":[{"ParameterName":"DestinationPlace","ParameterValue":"EG","Message":"Incorrect value"}]}
+ERROR 400 DETECTED 2020-02-14, IAH-sky - 8 days, to: EG-sky---- {"ValidationErrors":[{"ParameterName":"DestinationPlace","ParameterValue":"EG","Message":"Incorrect value"}]}
+ERROR 400 DETECTED 2020-02-15, IAH-sky - 8 days, to: EG-sky---- {"ValidationErrors":[{"ParameterName":"DestinationPlace","ParameterValue":"EG","Message":"Incorrect value"}]}
+ERROR 400 DETECTED 2020-02-16, IAH-sky - 8 days, to: EG-sky---- {"ValidationErrors":[{"ParameterName":"DestinationPlace","ParameterValue":"EG","Message":"Incorrect value"}]}
+ERROR 400 DETECTED 2020-02-17, IAH-sky - 8 days, to: EG-sky---- {"ValidationErrors":[{"ParameterName":"DestinationPlace","ParameterValue":"EG","Message":"Incorrect value"}]}
+ERROR 400 DETECTED 2020-02-18, IAH-sky - 8 days, to: EG-sky---- {"ValidationErrors":[{"ParameterName":"DestinationPlace","ParameterValue":"EG","Message":"Incorrect value"}]}
+ERROR 400 DETECTED 2020-02-19, IAH-sky - 8 days, to: EG-sky---- {"ValidationErrors":[{"ParameterName":"DestinationPlace","ParameterValue":"EG","Message":"Incorrect value"}]}
+ERROR 400 DETECTED 2020-02-13, IAH-sky - 8 days, to: VN-sky---- {"ValidationErrors":[{"ParameterName":"DestinationPlace","ParameterValue":"VN","Message":"Incorrect value"}]}
+ERROR 400 DETECTED 2020-02-14, IAH-sky - 8 days, to: VN-sky---- {"ValidationErrors":[{"ParameterName":"DestinationPlace","ParameterValue":"VN","Message":"Incorrect value"}]}
+ERROR 400 DETECTED 2020-02-15, IAH-sky - 8 days, to: VN-sky---- {"ValidationErrors":[{"ParameterName":"DestinationPlace","ParameterValue":"VN","Message":"Incorrect value"}]}
+ERROR 400 DETECTED 2020-02-16, IAH-sky - 8 days, to: VN-sky---- {"ValidationErrors":[{"ParameterName":"DestinationPlace","ParameterValue":"VN","Message":"Incorrect value"}]}
+ERROR 400 DETECTED 2020-02-17, IAH-sky - 8 days, to: VN-sky---- {"ValidationErrors":[{"ParameterName":"DestinationPlace","ParameterValue":"VN","Message":"Incorrect value"}]}
+ERROR 400 DETECTED 2020-02-18, IAH-sky - 8 days, to: VN-sky---- {"ValidationErrors":[{"ParameterName":"DestinationPlace","ParameterValue":"VN","Message":"Incorrect value"}]}
+ERROR 400 DETECTED 2020-02-19, IAH-sky - 8 days, to: VN-sky---- {"ValidationErrors":[{"ParameterName":"DestinationPlace","ParameterValue":"VN","Message":"Incorrect value"}]}
+2019-10-31 SUCCESS- Runtime: 0 hours 6 minutes, 23 seconds
+NewFile
+NewFile
+NewFile
+NewFile
+2019-10-31 SUCCESS- Runtime: 0 hours 8 minutes, 34 seconds
+NewFile
+NewFile
+NewFile
+NewFile
+NewFile
+2019-11-05 SUCCESS- Runtime: 1 hours 21 minutes, 19 seconds
