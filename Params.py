@@ -1,23 +1,22 @@
 # specify the minimum price USD
-MinPrice: int = 800
+MinPrice: int = 4000
 
 # Specify locations refer to skyscanner documentation to find Airport key
-fromAirports = ["IAH-sky"]
+fromAirports = ["AUS-sky"]
 # Houston
-toAirports = ["PARI-sky", "CAI-sky", "CPT-sky", "SGN-sky", "HKG-sky", "BCN-sky", "TYOA-sky"]
+toAirports = ["BKK-sky"]# "CAI-sky", "CPT-sky", "SGN-sky", "HKG-sky", "BCN-sky", "TYOA-sky"]
 # Paris, Cairo, Cape Town, Vietnam, Hon Kong, Barcelona, Tokyo
 
 # Specify length of vacation, NON inclusive to the max vacation day
-minVacationDays = 8
+minVacationDays = 5
 maxVacationDays = 11
 
 # Specify week window we are looking through, NON inclusive to max week
 
-minWeeksAway = 15
-maxWeeksAway = 25
+minWeeksAway = 5
+maxWeeksAway = 6
 
 # Specify email
 email = 'dtabarini@gmail.com'
 
-# Don't worry about changing this guy
 differenceOfVacationDays = maxVacationDays - minVacationDays

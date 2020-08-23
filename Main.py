@@ -18,40 +18,41 @@ def dateToString(inputDate):
 foutput = open("output.txt", "a+")
 
 
-x =0;
-# PROGRAM START
+x = 0
 start_time = time.time()
 now = datetime.datetime.now()
 totalLowPriceFlights: List[Flight] = []
-for fromAP in Params.fromAirports:
-    for toAP in Params.toAirports:
+for fromAirport in Params.fromAirports:
+    for toAirport in Params.toAirports:
         currentDate = now + datetime.timedelta(weeks=Params.minWeeksAway)
+
         while currentDate != now + datetime.timedelta(weeks=Params.maxWeeksAway):
+
             for i in range(Params.differenceOfVacationDays):
-                loopTillWeCan = True
-                while loopTillWeCan:
+                continue_loop = True
+                while continue_loop:
                     try:
-                        print(toAP)
+                        print(toAirport)
                         x = x + 1
-                        tempLowPriceFlights = checkFlights(dateToString(currentDate), fromAP,
+                        tempLowPriceFlights = checkFlights(dateToString(currentDate), fromAirport,
                                                            dateToString(currentDate + datetime.timedelta(
-                                                               days=Params.minVacationDays + i)), toAP)
+                                                               days=Params.minVacationDays + i)), toAirport)
                         totalLowPriceFlights.extend(tempLowPriceFlights)
-                        loopTillWeCan = False
+                        continue_loop = False
 
                     except Exceptions.TooManyAcessTrys:
                         time.sleep(5)
                     except Exceptions.OtherError as e:
                         print("ERROR %d DETECTED %s, %s - %d days, to: %s---- %s\n" % (e.value,
-                        dateToString(currentDate), fromAP, Params.minVacationDays + i, toAP, e.response)
+                        dateToString(currentDate), fromAirport, Params.minVacationDays + i, toAirport, e.response)
                               )
                         foutput.write("ERROR %d DETECTED %s, %s - %d days, to: %s---- %s\n" % (e.value,
-                        dateToString(currentDate), fromAP, Params.minVacationDays + i, toAP, e.response))
-                        loopTillWeCan = False
+                        dateToString(currentDate), fromAirport, Params.minVacationDays + i, toAirport, e.response))
+                        continue_loop = False
 
             currentDate += datetime.timedelta(days=1)
 
-if len(totalLowPriceFlights) > 0:  # We have found flights
+if len(totalLowPriceFlights) > 0: 
     f = open("emailDraft.txt", "w+")
     f.write("Hey look, we found some cheap flights for you!\n")
     f.write("\n\n")
@@ -78,9 +79,11 @@ if len(totalLowPriceFlights) > 0:  # We have found flights
     server.send_message(msg)
     del msg
 
-
+#log runtime
 foutput.write("%s SUCCESS- Runtime: %d hours %d minutes, %d seconds\n" % (dateToString(now),(trunc(int((time.time() - start_time)))) / 3600,
                                                                 ((trunc(int((time.time() - start_time)))) % 3600)/ 60,
                                                                 ((trunc(int((time.time() - start_time)))) % 3600)
                                                                 % 60))
 foutput.close()
+
+

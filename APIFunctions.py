@@ -17,68 +17,64 @@ def checkFlights(outBoundDate, outBoundLocation, inBoundDate, inBoundLocation):
         'x-rapidapi-key': SensitiveInformation.API_PASSWORD,
         'content-type': "application/x-www-form-urlencoded"
     }
+
     response = requests.request("POST", url, data=payload, headers=headers)
 
     lowFLightsList: list
     if response:
 
         fullKey = response.headers["Location"]
-
-
         key = fullKey[-36:]
-        url = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/uk2/v1.0/" + key;
+        url = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/uk2/v1.0/" + key
         querystring = {"sortType": "price", "sortOrder": "asc", "pageIndex": "0", "pageSize": "10"}
+
         headers = {
             'x-rapidapi-host': "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
             'x-rapidapi-key': SensitiveInformation.API_PASSWORD
         }
+
         response = requests.request("GET", url, headers=headers, params=querystring)
-        # converting to a dictionary
 
         if response:
-                    responseDict = json.loads(response.text)
-        if "Itineraries" in responseDict:
-            itineraryList = responseDict["Itineraries"]
-            index = -1
-            for itineraryDict in itineraryList:
-                index += 1
-                priceList = itineraryDict["PricingOptions"]
-                for priceOptionDict in priceList:
-                    price = priceOptionDict["Price"]
-                    # print(price)
-                    if int(price) < Params.MinPrice:
-                        if not (index in usedItineraryMap):
-                            usedItineraryMap.add(index)
-                            # Found a DEAL
-                            flight = Flight()
-                            # time to set:
-                            # price
-                            flight.price = price
-                            # link
-                            flight.link = priceOptionDict["DeeplinkUrl"]
-                            # Going into the legs to toAP, fromAP, startDate, endDate
-                            legsList = responseDict["Legs"]
-                            for leg in legsList:
-                                if leg["Id"] == itineraryDict["OutboundLegId"]:
-                                    flight.startDate = leg["Departure"]
-                                    flight.startDateArrival = leg["Arrival"]
+            responseDict = json.loads(response.text)
+    
+            if "Itineraries" in responseDict:
+                queryDict = responseDict["Query"]
+                itineraryList = responseDict["Itineraries"]
+                index = -1
+                for itineraryDict in itineraryList:
+                    index += 1
+                    priceList = itineraryDict["PricingOptions"]
+                    for priceOptionDict in priceList:
+                        price = priceOptionDict["Price"]
+                        if int(price) < Params.MinPrice:
+                            if not (index in usedItineraryMap):
+                                usedItineraryMap.add(index)
+                                flight = Flight()
+                                flight.price = price
+                                flight.link = priceOptionDict["DeeplinkUrl"]
+                                legsList = responseDict["Legs"]
+                                for leg in legsList:
+                                    if leg["Id"] == itineraryDict["OutboundLegId"]:
+                                        flight.startDate = leg["Departure"]
+                                        flight.startDateArrival = leg["Arrival"]
 
-                                if leg["Id"] == itineraryDict["InboundLegId"]:
-                                    flight.endDate = leg["Departure"]
-                                    flight.endDateArrival = leg["Arrival"]
-                            queryDict = responseDict["Query"]
-                            originID = queryDict["OriginPlace"]
-                            destID = queryDict["DestinationPlace"]
-                            placesList = responseDict["Places"]
-                            for place in placesList:
-                                if place["Id"] == int(originID):
-                                    flight.fromAP = place["Name"]
-                                if place["Id"] == int(destID):
-                                    flight.toAP = place["Name"]
+                                    if leg["Id"] == itineraryDict["InboundLegId"]:
+                                        flight.endDate = leg["Departure"]
+                                        flight.endDateArrival = leg["Arrival"]
+                                queryDict = responseDict["Query"]
+                                originID = queryDict["OriginPlace"]
+                                destID = queryDict["DestinationPlace"]
+                                placesList = responseDict["Places"]
+                                for place in placesList:
+                                    if place["Id"] == int(originID):
+                                        flight.fromAP = place["Name"]
+                                    if place["Id"] == int(destID):
+                                        flight.toAP = place["Name"]
 
-                            return_list.append(flight)
-                    else:
-                        return return_list
+                                return_list.append(flight)
+                        else:
+                            return return_list`
         else:
             raise OtherError(response.status_code, response.text)
         return return_list
